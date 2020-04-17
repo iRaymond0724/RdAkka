@@ -49,6 +49,8 @@ public class System {
 //        actorRef.tell(new Command("echo"), null);
         Thread.sleep(5000);
 
+        // hello
+
         log.debug("Actor System Shutdown Starting...");
         actorSystem.shutdown();
     }
