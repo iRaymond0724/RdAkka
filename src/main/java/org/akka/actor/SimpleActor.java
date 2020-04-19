@@ -20,12 +20,18 @@
 
 package org.akka.actor;
 
+import akka.actor.ActorRef;
+import akka.actor.ActorSystem;
+import akka.actor.Props;
 import akka.actor.UntypedActor;
 import akka.event.Logging;
 import akka.event.LoggingAdapter;
 import org.akka.command.Command;
 import org.akka.event.Event;
+import utils.HttpClientUtil;
 
+
+import java.util.*;
 import java.util.UUID;
 
 /**
@@ -50,13 +56,17 @@ public class SimpleActor extends UntypedActor {
         if (msg instanceof Command) {
             final String data = ((Command) msg).getData();
             final Event event = new Event(data, UUID.randomUUID().toString());
-
+            final ActorSystem actorSystem = ActorSystem.create("actor-system");
+            final ActorRef actorRef = actorSystem.actorOf(Props.create(helloActor.class), "hello-actor");
+            actorRef.tell(new Command("aka刀槍不入"),null);
 //            System.out.println("get Message+++++++++++++++++++++++++++++");
             log.info("Received Msg: " + msg);
             // emmit an event somewhere...
+
 
         } else if (msg.equals("echo")) {
             log.info("ECHO!");
         }
     }
+
 }

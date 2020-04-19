@@ -1,4 +1,16 @@
 package org.akka.command;
 
-public class hello {
+import akka.actor.UntypedActor;
+import utils.HttpClientUtil;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class hello extends UntypedActor {
+
+    @Override
+    public void onReceive(Object object) throws Exception {
+
+    }
+
 }

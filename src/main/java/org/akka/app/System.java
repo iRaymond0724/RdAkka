@@ -22,6 +22,7 @@ import akka.actor.ActorSystem;
 import akka.actor.Props;
 import org.akka.actor.SimpleActor;
 import org.akka.command.Command;
+import org.akka.command.hello;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,18 +37,15 @@ public class System {
 
         final ActorSystem actorSystem = ActorSystem.create("actor-system");
 
-        Thread.sleep(1000);
+//        Thread.sleep(1000);
 
-        final ActorRef actorRef = actorSystem.actorOf(Props.create(SimpleActor.class), "simple-actor");
+        final ActorRef simpleActorRef = actorSystem.actorOf(Props.create(SimpleActor.class), "simple-actor");
+        final ActorRef helloActorRef = actorSystem.actorOf(Props.create(hello.class), "hello-actor");
+        simpleActorRef.tell(new Command("CMD 1"), null);
+//        helloActorRef.tell(new  Command("CMD 1"), null);
+//        Thread.sleep(1000);
 
-        actorRef.tell(new Command("CMD 1"), null);
-        Thread.sleep(1000);
-        actorRef.tell(new Command("CMD 2"), null);
-        actorRef.tell(new Command("CMD 3"), null);
-        actorRef.tell(new Command("CMD 4"), null);
-        actorRef.tell(new Command("CMD 5"), null);
-//        actorRef.tell(new Command("echo"), null);
-        Thread.sleep(5000);
+        Thread.sleep(6000);
 
         // hello
 
